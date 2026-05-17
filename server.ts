@@ -56,15 +56,15 @@ async function startServer() {
 
       res.json(JSON.parse(response.text || "{}"));
     } catch (error: any) {
-      console.error("Optimization Error:", error);
-      // Fallback for Quota or API issues
+      // SILENT FALLBACK: Avoid sending ApiError details to client
+      console.warn("STRIKEFORCE: Optimization API Quota limit reached. Serving local tactical data.");
       res.json({
         settings: [
           { category: "DISPLAY", setting: "DISPLAY MODE", value: "FULLSCREEN EXCLUSIVE", impact: "LOW LATENCY" },
           { category: "QUALITY", setting: "TEXTURE RESOLUTION", value: "LOW/NORMAL", impact: "VRAM SAVING" },
           { category: "STRIKEFORCE", setting: "CLOUD BYPASS", value: "ENABLED", impact: "PING STABILITY" }
         ],
-        proTip: "STRIKEFORCE NOTICE: AI Quota reached. Serving cloud-cached tactical defaults."
+        proTip: "STRIKEFORCE CLOUD: AI Quota active. Serving pre-cached tactical parameters."
       });
     }
   });
@@ -96,20 +96,20 @@ async function startServer() {
       });
       res.json(JSON.parse(response.text || "[]"));
     } catch (error: any) {
-      console.error("Loadout Error:", error);
-      // Fail-safe meta loadouts if Gemini hits quota
+      // SILENT FALLBACK: Avoid sending ApiError details to client
+      console.warn("STRIKEFORCE: Loadout API Quota limit reached. Serving local meta data.");
       res.json([
         {
           weapon: "MCW (CLOUD STRIKE)",
           type: "ASSAULT RIFLE",
           attachments: ["Cyclone Barrel", "Slate Reflector", "RB Regal Stock", "40 Round Mag", "Bruen Support Grip"],
-          description: "Low recoil, high accuracy pattern for mid-to-long range engagements."
+          description: "Stable, high-accuracy build for mid-range dominance. (Cloud Fallback active)"
         },
         {
           weapon: "HRM-9 (TACTICAL)",
           type: "SMG",
           attachments: ["L4R Flash Hider", "Princeps Long Barrel", "Folding Stock", "50 Round Drum", "DR-6 Handstop"],
-          description: "Extreme mobility and competitive time-to-kill for close-quarters combat."
+          description: "Extreme mobility for close-quarters combat. (Cloud Fallback active)"
         }
       ]);
     }

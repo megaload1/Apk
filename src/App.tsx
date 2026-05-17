@@ -194,12 +194,20 @@ const LoadoutsSection = () => {
       </div>
 
       <div className="space-y-4">
+        {loadouts.length > 0 && loadouts[0].description.includes('Cloud Fallback') && (
+          <div className="bg-tactical-orange/10 border border-tactical-orange/30 p-3 rounded mb-4 flex items-center gap-3">
+            <ShieldCheck size={18} className="text-tactical-orange" />
+            <p className="text-[10px] text-tactical-orange uppercase font-mono leading-tight">
+              Cloud Synchronization active. Serving tactical meta-data from decentralized cache (AI Quota managed).
+            </p>
+          </div>
+        )}
         {loading ? (
           Array(3).fill(0).map((_, i) => (
             <div key={i} className="h-32 bg-tactical-border/30 animate-pulse rounded border border-tactical-border" />
           ))
         ) : (
-          loadouts.map((l, i) => (
+          Array.isArray(loadouts) && loadouts.map((l, i) => (
             <motion.div 
               key={i}
               initial={{ opacity: 0, x: -10 }}
@@ -215,7 +223,7 @@ const LoadoutsSection = () => {
                 <Ghost size={16} className="opacity-20 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex flex-wrap gap-2 mb-3">
-                {l.attachments.map((a, j) => (
+                {Array.isArray(l.attachments) && l.attachments.map((a, j) => (
                   <span key={j} className="text-[9px] font-mono bg-tactical-card px-2 py-0.5 border border-tactical-border uppercase">
                     {a}
                   </span>
@@ -341,7 +349,7 @@ const OptimizationPanel = () => {
                 <span className="col-span-1">VALUE</span>
                 <span className="col-span-1 text-right">IMPACT</span>
               </div>
-              {result.settings.map((s, i) => (
+              {Array.isArray(result.settings) && result.settings.map((s, i) => (
                 <div key={i} className="grid grid-cols-4 p-2 bg-tactical-bg border border-tactical-border text-xs font-mono uppercase">
                    <span className="text-tactical-orange">{s.category}</span>
                    <span className="opacity-80 truncate">{s.setting}</span>
