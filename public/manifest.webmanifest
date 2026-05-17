@@ -1,0 +1,17 @@
+{
+  "name": "StrikeForce Booster",
+  "short_name": "StrikeForce",
+  "description": "Tactical performance optimization and loadout dashboard for Call of Duty players.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#00ff41",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/nolan/512/00ff41/shield.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

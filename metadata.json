@@ -1,0 +1,6 @@
+{
+  "name": "StrikeForce Booster",
+  "description": "Tactical performance optimization and loadout dashboard for Call of Duty players.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
