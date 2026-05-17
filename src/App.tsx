@@ -483,29 +483,21 @@ export default function App() {
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <p className="text-[10px] font-mono text-tactical-green mb-4 uppercase tracking-widest">System Integrated: Capacitor + GitHub Actions</p>
+                <p className="text-[10px] font-mono text-tactical-green mb-4 uppercase tracking-widest">Automation Matrix: Capacitor + GitHub Actions</p>
                 
                 <div className="flex items-start gap-4 p-3 bg-tactical-bg border border-tactical-border hover:border-tactical-green/30 transition-all group">
-                  <div className="bg-tactical-green text-black w-8 h-8 rounded flex items-center justify-center shrink-0 text-sm font-black italic">01</div>
+                  <div className="bg-tactical-green text-black w-8 h-8 rounded flex items-center justify-center shrink-0 text-sm font-black italic">!</div>
                   <div>
-                    <h4 className="text-xs font-bold uppercase mb-1">Push to GitHub</h4>
-                    <p className="text-[10px] opacity-60 leading-normal">Click 'Export to GitHub' in the AI Studio menu. This pushes your code to a private or public repo.</p>
+                    <h4 className="text-xs font-bold uppercase mb-1 text-tactical-green">Ready for Native Build</h4>
+                    <p className="text-[10px] opacity-60 leading-normal">System manifests, tactical icons, and kernel bridges are fully injected. Just push your code to trigger the GitHub compiler.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4 p-3 bg-tactical-bg border border-tactical-border hover:border-tactical-green/30 transition-all">
-                  <div className="bg-tactical-green text-black w-8 h-8 rounded flex items-center justify-center shrink-0 text-sm font-black italic">02</div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase mb-1">Auto-Compiler Triggers</h4>
-                    <p className="text-[10px] opacity-60 leading-normal">The integrated GitHub Action (android_build.yml) detects the code and automatically starts a native Android build on the cloud.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-3 bg-tactical-bg border border-tactical-border hover:border-tactical-green/30 transition-all">
-                  <div className="bg-tactical-green text-black w-8 h-8 rounded flex items-center justify-center shrink-0 text-sm font-black italic">03</div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase mb-1">Download APK</h4>
-                    <p className="text-[10px] opacity-60 leading-normal">Go to the 'Actions' tab on GitHub. Once complete (approx 3-5 mins), download the compiled APK from the 'Artifacts' section.</p>
+                   <ShieldCheck className="text-tactical-green shrink-0" size={20} />
+                   <div>
+                    <h4 className="text-xs font-bold uppercase mb-1">Android API 34+ Compliant</h4>
+                    <p className="text-[10px] opacity-60 leading-normal">Your app is optimized for modern mobile hardware with low-latency network protocols.</p>
                   </div>
                 </div>
               </div>

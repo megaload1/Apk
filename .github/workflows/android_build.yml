@@ -51,9 +51,9 @@ jobs:
 
       - name: Generate App Icons
         run: |
-          # Use the generated image to create native icons
-          # We point to the image I just generated
-          npx @capacitor/assets generate --android --icon ./src/assets/images/app_icon_source_1779006148597.png
+          # Use standard Capacitor assets generation
+          # It looks for assets/icon.png and assets/splash.png automatically
+          npx @capacitor/assets generate --android
 
       - name: Build APK (Debug)
         run: |
