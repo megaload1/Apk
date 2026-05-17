@@ -25,6 +25,8 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 
 // --- Types ---
+const API_BASE = (process.env.APP_URL || '').replace(/\/$/, '');
+
 interface Loadout {
   weapon: string;
   type: string;
@@ -159,7 +161,7 @@ const LoadoutsSection = () => {
   const fetchLoadouts = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/loadouts', { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/loadouts`, { method: 'POST' });
       const data = await res.json();
       setLoadouts(data);
     } catch (e) {
@@ -237,7 +239,7 @@ const OptimizationPanel = () => {
     if (!hardware) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/optimize', {
+      const res = await fetch(`${API_BASE}/api/optimize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ hardware, targetFPS })
