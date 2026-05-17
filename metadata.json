@@ -1,6 +1,6 @@
 {
   "name": "StrikeForce Booster",
-  "description": "Tactical performance optimization and loadout dashboard for Call of Duty players. Built for mobile engagement with integrated system analytics.",
+  "description": "Tactical performance optimization and loadout dashboard for Call of Duty players. System Version: v1.1.2-STABLE",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

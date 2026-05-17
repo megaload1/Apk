@@ -1,6 +1,6 @@
 {
   "name": "StrikeForce Booster",
-  "short_name": "StrikeForce",
+  "short_name": "StrikeForce V1.1",
   "description": "Tactical performance optimization and loadout dashboard for Call of Duty players.",
   "start_url": "/",
   "display": "standalone",

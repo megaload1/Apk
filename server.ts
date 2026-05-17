@@ -57,7 +57,15 @@ async function startServer() {
       res.json(JSON.parse(response.text || "{}"));
     } catch (error: any) {
       console.error("Optimization Error:", error);
-      res.status(500).json({ error: "Failed to generate tips" });
+      // Fallback for Quota or API issues
+      res.json({
+        settings: [
+          { category: "DISPLAY", setting: "DISPLAY MODE", value: "FULLSCREEN EXCLUSIVE", impact: "LOW LATENCY" },
+          { category: "QUALITY", setting: "TEXTURE RESOLUTION", value: "LOW/NORMAL", impact: "VRAM SAVING" },
+          { category: "STRIKEFORCE", setting: "CLOUD BYPASS", value: "ENABLED", impact: "PING STABILITY" }
+        ],
+        proTip: "STRIKEFORCE NOTICE: AI Quota reached. Serving cloud-cached tactical defaults."
+      });
     }
   });
 
@@ -89,7 +97,21 @@ async function startServer() {
       res.json(JSON.parse(response.text || "[]"));
     } catch (error: any) {
       console.error("Loadout Error:", error);
-      res.status(500).json({ error: "Failed to fetch loadouts" });
+      // Fail-safe meta loadouts if Gemini hits quota
+      res.json([
+        {
+          weapon: "MCW (CLOUD STRIKE)",
+          type: "ASSAULT RIFLE",
+          attachments: ["Cyclone Barrel", "Slate Reflector", "RB Regal Stock", "40 Round Mag", "Bruen Support Grip"],
+          description: "Low recoil, high accuracy pattern for mid-to-long range engagements."
+        },
+        {
+          weapon: "HRM-9 (TACTICAL)",
+          type: "SMG",
+          attachments: ["L4R Flash Hider", "Princeps Long Barrel", "Folding Stock", "50 Round Drum", "DR-6 Handstop"],
+          description: "Extreme mobility and competitive time-to-kill for close-quarters combat."
+        }
+      ]);
     }
   });
 

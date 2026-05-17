@@ -163,9 +163,11 @@ const LoadoutsSection = () => {
     try {
       const res = await fetch(`${API_BASE}/api/loadouts`, { method: 'POST' });
       const data = await res.json();
-      setLoadouts(data);
+      // Safety check: ensure data is an array
+      setLoadouts(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
+      setLoadouts([]); // Fallback to empty array on network error
     } finally {
       setLoading(false);
     }
@@ -238,6 +240,7 @@ const OptimizationPanel = () => {
     e.preventDefault();
     if (!hardware) return;
     setLoading(true);
+    setResult(null); // Clear previous result
     try {
       const res = await fetch(`${API_BASE}/api/optimize`, {
         method: 'POST',
@@ -245,6 +248,10 @@ const OptimizationPanel = () => {
         body: JSON.stringify({ hardware, targetFPS })
       });
       const data = await res.json();
+      // Ensure settings is an array
+      if (data && data.settings && !Array.isArray(data.settings)) {
+         data.settings = [];
+      }
       setResult(data);
     } catch (e) {
       console.error(e);
@@ -395,7 +402,7 @@ export default function App() {
             </div>
             <div>
               <h1 className="font-mono text-xl font-bold tracking-tighter leading-none italic uppercase">STRIKEFORCE</h1>
-              <span className="text-[10px] font-mono tracking-widest text-tactical-green uppercase opacity-70">BOOSTER V4.2.1</span>
+              <span className="text-[10px] font-mono tracking-widest text-tactical-green uppercase opacity-70">BOOSTER CLOUD V1.1.2</span>
             </div>
           </div>
 

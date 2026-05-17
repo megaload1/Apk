@@ -33,33 +33,27 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Accept Android Licenses
-        run: yes | sdkmanager --licenses || true
-
       - name: Initialize Capacitor
         run: |
-          # Disable telemetry for cleaner CI
           npx cap telemetry off
-          
-          # Check if android platform exists, if not add it
-          if [ ! -d "android" ]; then
-            npx cap add android
+          # Clean state for build stability
+          if [ -d "android" ]; then
+             rm -rf android
           fi
-          
-          # Sync assets and plugins
+          npx cap add android
           npx cap sync android
 
       - name: Generate App Icons
-        run: |
-          # Use standard Capacitor assets generation
-          # It looks for assets/icon.png and assets/splash.png automatically
-          npx @capacitor/assets generate --android
+        run: npx @capacitor/assets generate --android
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Build APK (Debug)
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon --stacktrace || (./gradlew clean && ./gradlew assembleDebug --no-daemon)
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
