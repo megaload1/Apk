@@ -36,13 +36,24 @@ jobs:
       - name: Accept Android Licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Initialize Capacitor Android
+      - name: Initialize Capacitor
         run: |
-          # Robust platform detection
+          # Disable telemetry for cleaner CI
+          npx cap telemetry off
+          
+          # Check if android platform exists, if not add it
           if [ ! -d "android" ]; then
             npx cap add android
           fi
+          
+          # Sync assets and plugins
           npx cap sync android
+
+      - name: Generate App Icons
+        run: |
+          # Use the generated image to create native icons
+          # We point to the image I just generated
+          npx @capacitor/assets generate --android --icon ./src/assets/images/app_icon_source_1779006148597.png
 
       - name: Build APK (Debug)
         run: |
@@ -53,5 +64,5 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: StrikeForce-Booster-V1
+          name: StrikeForce-Booster-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
