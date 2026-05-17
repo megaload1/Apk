@@ -24,22 +24,26 @@ jobs:
       - name: Build Web Project
         run: npm run build
 
-      - name: Capacitor Sync
+      - name: Initialize Capacitor Android
         run: |
-          npx cap add android
-          npx cap sync
+          # Only add the platform if it doesn't already exist
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+          # Update and copy web assets to the native project
+          npx cap sync android
         
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Build APK
+      - name: Build APK (Debug)
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
